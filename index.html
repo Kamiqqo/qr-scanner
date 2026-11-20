@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Screen Scanner — сканируй QR с экрана</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/jsqr@1.4.0/dist/jsQR.min.js"></script>
+</head>
+<body>
+  <header>
+    <h1> QR Screen Scanner</h1>
+    <p>Захвати экран, окно или вкладку — QR найдётся автоматически</p>
+  </header>
+
+  <main>
+    <div class="capture-wrap">
+      <video id="video" playsinline muted></video>
+      <canvas id="canvas" hidden></canvas>
+
+      <div class="scan-frame">
+        <span class="corner tl"></span>
+        <span class="corner tr"></span>
+        <span class="corner bl"></span>
+        <span class="corner br"></span>
+      </div>
+
+      <div id="scanLabel" class="scan-label" hidden> Ищу QR…</div>
+
+      <div id="placeholder" class="placeholder">
+        <div class="ph-icon"></div>
+        <p>Нажмите <b>«Захватить экран»</b></p>
+        <p class="hint">Выберите окно, вкладку или весь экран с QR-кодом</p>
+      </div>
+
+      <div id="status" class="status">Готов к захвату</div>
+    </div>
+
+    <div class="controls">
+      <button id="startBtn" class="btn primary">▶ Захватить экран</button>
+      <button id="stopBtn" class="btn" disabled>⏹ Остановить</button>
+      <label class="btn file-btn">
+         Из картинки
+        <input type="file" id="fileInput" accept="image/*" hidden>
+      </label>
+      <label class="btn file-btn">
+         Из буфера
+        <input type="button" id="pasteBtn" hidden>
+      </label>
+    </div>
+
+    <div class="settings">
+      <label>
+        <input type="checkbox" id="autoOpen" checked>
+        Открывать ссылку автоматически
+      </label>
+      <label>
+        <input type="checkbox" id="showOverlay" checked>
+        Показывать рамку поиска
+      </label>
+    </div>
+
+    <div id="result" class="result" hidden>
+      <h2> QR распознан</h2>
+      <p id="resultText"></p>
+      <div class="result-actions">
+        <button id="openBtn" class="btn primary"> Открыть ссылку</button>
+        <button id="copyBtn" class="btn"> Копировать</button>
+        <button id="againBtn" class="btn"> Сканировать снова</button>
+      </div>
+    </div>
+
+    <div class="history" id="historyBlock" hidden>
+      <h2>История</h2>
+      <ul id="historyList"></ul>
+      <button id="clearHistory" class="btn small">Очистить</button>
+    </div>
+  </main>
+
+  <footer>
+    <p>Работает в браузере. Скриншот не покидает устройство.</p>
+  </footer>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
